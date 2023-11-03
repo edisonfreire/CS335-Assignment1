@@ -43,33 +43,39 @@ int main() {
     // std::cout << "Original Image Data[0]: " << originalImageData[0] << std::endl;
     // std::cout << "Copied Image Data[0]: " << copiedImageData[0] << std::endl;
 
-    ActionCard card;
-    card.Print();
-    card.setDrawn(true);
-    card.setInstruction("DRAW 1 CARD");
-    card.Print();
-    std::cout << card.isPlayable() << std::endl;
+    // ActionCard card;
+    // card.Print();
+    // card.setDrawn(true);
+    // card.setInstruction("DRAW 1 CARD");
+    // card.Print();
+    // std::cout << card.isPlayable() << std::endl;
 
-    PointCard pc;
-    pc.setDrawn(true);
-    pc.setInstruction("Not a number");
-    pc.Print();
-    std::cout << pc.isPlayable() << std::endl;
-    pc.setInstruction("100");
-    pc.Print();
-    std::cout << pc.isPlayable() << std::endl;
+    // PointCard pc;
+    // pc.setDrawn(true);
+    // pc.setInstruction("Not a number");
+    // pc.Print();
+    // std::cout << pc.isPlayable() << std::endl;
+    // pc.setInstruction("100");
+    // pc.Print();
+    // std::cout << pc.isPlayable() << std::endl;
+
+    // ActionCard card1;
+    // card1.setDrawn(true);
+    // card1.setInstruction("DRAW 5 CARDS");
+    // std::cout << "Original Card:" << std::endl;
+    // card1.Print();
+
+    // ActionCard card2(std::move(card1));
+    // std::cout << "New Card (moved):" << std::endl;
+    // card2.Print();
+
+    // card1.Print();
 
     ActionCard card1;
-    card1.setDrawn(true);
-    card1.setInstruction("DRAW 5 CARDS");
-    std::cout << "Original Card:" << std::endl;
     card1.Print();
 
-    ActionCard card2(std::move(card1));
-    std::cout << "New Card (moved):" << std::endl;
+    PointCard card2;
     card2.Print();
-
-    card1.Print();
 
     return 0;
 }

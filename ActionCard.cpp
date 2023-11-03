@@ -1,10 +1,8 @@
 #include "ActionCard.hpp"
 
-ActionCard::ActionCard() {
+ActionCard::ActionCard() : Card() {
     setType(ACTION_CARD);
-    setDrawn(false);
     setInstruction("");
-    setImageData(nullptr);
 }
 
 bool ActionCard::isPlayable() {
