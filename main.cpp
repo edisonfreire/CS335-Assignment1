@@ -70,12 +70,64 @@ int main() {
     // card2.Print();
 
     // card1.Print();
+    // testing cards
+
+    int imageData[80] = {
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+    51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+    61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+    71, 72, 73, 74, 75, 76, 77, 78, 79, 80
+    };
 
     ActionCard card1;
+    card1.setDrawn(true);
+    card1.setInstruction("DRAW 2 CARDS");
+    card1.setImageData(imageData);
     card1.Print();
 
-    PointCard card2;
+    ActionCard card2(card1);
     card2.Print();
+    // test case 1 worked for card
+
+    ActionCard card3(std::move(card1));
+    card1.Print();
+    card3.Print();
+    // test case 2 worked for card
+
+    ActionCard drawCard;
+    drawCard.setDrawn(true);
+    drawCard.setInstruction("DRAW 15 CARDS");
+    std::cout << drawCard.isPlayable() << std::endl;
+
+    ActionCard playCard;
+    playCard.setDrawn(true);
+    playCard.setInstruction("PLAY 1 CARD");
+    std::cout << playCard.isPlayable() << std::endl;
+
+    ActionCard reverseCard;
+    reverseCard.setDrawn(true);
+    reverseCard.setInstruction("REVERSE HAND");
+    std::cout << reverseCard.isPlayable() << std::endl;
+
+    ActionCard swapCard;
+    swapCard.setDrawn(true);
+    swapCard.setInstruction("SWAP HAND WITH OPPONENT");
+    std::cout << swapCard.isPlayable() << std::endl;
+
+    PointCard numberCard;
+    numberCard.setDrawn(true);
+    numberCard.setInstruction("15");
+    std::cout << numberCard.isPlayable() << std::endl;
+
+    PointCard stringCard;
+    stringCard.setDrawn(true);
+    stringCard.setInstruction("this is a string");
+    std::cout << stringCard.isPlayable() << std::endl;
+    //test 3 passed for card
 
     return 0;
 }

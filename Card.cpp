@@ -80,8 +80,10 @@ void Card::setImageData(int* data) {
         for (int i = 0; i < 80; i++) {
             bitmap_[i] = data[i];
         }
+    } else {
+        delete[] bitmap_;
+        bitmap_ = nullptr;
     }
-    bitmap_ = nullptr; // ?
 }
 
 bool Card::getDrawn() const {
