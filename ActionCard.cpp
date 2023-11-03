@@ -38,6 +38,6 @@ void ActionCard::Print() const {
         }
         std::cout << std::endl;
     } else {
-        std::cout << "Card: No image data" << std::endl;
+        std::cout << "Card:\nNo image data" << std::endl;
     }
 }
