@@ -129,5 +129,11 @@ int main() {
     std::cout << stringCard.isPlayable() << std::endl;
     //test 3 passed for card
 
+    ActionCard emptyAction;
+    emptyAction.Print();
+
+    PointCard emptyPoint;
+    emptyPoint.Print();
+
     return 0;
 }

@@ -29,7 +29,7 @@ void PointCard::Print() const {
     const int* imageData = getImageData();
     if (imageData) {
         std::cout << "Card:" << std::endl;
-        for (int i = 0; i < 64; i++) {
+        for (int i = 0; i < 80; i++) {
             std::cout << imageData[i] << ' ';
         }
         std::cout << std::endl;
