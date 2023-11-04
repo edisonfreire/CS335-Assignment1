@@ -2,17 +2,16 @@
 
 ActionCard::ActionCard() : Card() {
     setType(ACTION_CARD);
-    setInstruction("");
 }
 
 bool ActionCard::isPlayable() {
     const std::string instruction = getInstruction();
     if (getDrawn()) {
-        std::regex drawRegex("DRAW \\d+ CARDS");
+        std::regex drawRegex("DRAW \\d+ CARD(S");
         if (std::regex_match(instruction, drawRegex)) {
             return true;
         }
-        std::regex playRegex("PLAY \\d+ CARDS");
+        std::regex playRegex("PLAY \\d+ CARD(S)?");
         if (std::regex_match(instruction, playRegex)) {
             return true;
         }
@@ -20,12 +19,6 @@ bool ActionCard::isPlayable() {
             return true;
         }
         if (instruction == "SWAP HAND WITH OPPONENT") {
-            return true;
-        }
-        if (instruction == "DRAW 1 CARD") {
-            return true;
-        }
-        if (instruction == "PLAY 1 CARD") {
             return true;
         }
     }

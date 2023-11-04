@@ -1,8 +1,8 @@
 #include "PointCard.hpp"
 
 PointCard::PointCard() : Card() {
-    setType(POINT_CARD);
-    setInstruction("0");
+    // setType(POINT_CARD);
+    // setInstruction("0");
 }
 
 bool PointCard::isNumeric(const std::string& str) {
