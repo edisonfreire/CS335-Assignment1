@@ -2,6 +2,7 @@
 
 ActionCard::ActionCard() : Card() {
     setType(ACTION_CARD);
+    setInstruction("");
 }
 
 bool ActionCard::isPlayable() {
