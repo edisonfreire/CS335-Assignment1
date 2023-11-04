@@ -51,7 +51,7 @@ Card& Card::operator=(Card&& rhs) {
     return *this;
 }
 
-Card::Card() : cardType_{POINT_CARD}, instruction_{""}, bitmap_{nullptr}, drawn_{false} {}
+Card::Card() : cardType_{ACTION_CARD}, instruction_{""}, bitmap_{nullptr}, drawn_{false} {}
 
 std::string Card::getType() const {
     return (cardType_ == POINT_CARD) ? "Point Card" : "Action Card";
