@@ -194,9 +194,14 @@ int main() {
 
     // Draw the card from the deck and use it on the right side of an assignment
     ActionCard drawnCard;
+
+    // drawnCard = std::move(actionCardWithContent);
+    // drawnCard.Print();
+    // actionCardWithContent.Print();
+
     drawnCard = actionDeck.Draw();
 
-    // Check the content of the drawn card
+    // // Check the content of the drawn card
     drawnCard.Print();
 
     // Draw multiple cards in a row
