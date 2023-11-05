@@ -8,7 +8,7 @@ ActionCard::ActionCard() : Card() {
 bool ActionCard::isPlayable() {
     const std::string instruction = getInstruction();
     if (getDrawn()) {
-        std::regex drawRegex("DRAW \\d+ CARD(S)");
+        std::regex drawRegex("DRAW \\d+ CARD(S)?");
         if (std::regex_match(instruction, drawRegex)) {
             return true;
         }
