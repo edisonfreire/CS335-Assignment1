@@ -6,17 +6,12 @@ PointCard::PointCard() : Card() {
 }
 
 bool PointCard::isNumeric(const std::string& str) {
-    if (str.empty()) {
+    try {
+        std::stod(str);
+        return true;
+    } catch (const std::invalid_argument& ia) {
         return false;
     }
-
-    for (char c: str) {
-        if (!isdigit(c)) {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 bool PointCard::isPlayable() {
