@@ -1,6 +1,7 @@
 #include "Card.hpp"
 #include "ActionCard.hpp"
 #include "PointCard.hpp"
+#include "Deck.hpp"
 
 int main() {
     // test copy constructor
@@ -83,57 +84,127 @@ int main() {
     71, 72, 73, 74, 75, 76, 77, 78, 79, 80
     };
 
-    ActionCard card1;
-    card1.setDrawn(true);
-    card1.setInstruction("DRAW 2 CARDS");
-    card1.setImageData(imageData);
-    card1.Print();
+    // ActionCard card1;
+    // card1.setDrawn(true);
+    // card1.setInstruction("DRAW 2 CARDS");
+    // card1.setImageData(imageData);
+    // card1.Print();
 
-    ActionCard card2(card1);
-    card2.Print();
-    // test case 1 worked for card
+    // ActionCard card2(card1);
+    // card2.Print();
+    // // test case 1 worked for card
 
-    ActionCard card3(std::move(card1));
-    card1.Print();
-    card3.Print();
-    // test case 2 worked for card
+    // ActionCard card3(std::move(card1));
+    // card1.Print();
+    // card3.Print();
+    // // test case 2 worked for card
 
-    ActionCard drawCard;
-    drawCard.setDrawn(true);
-    drawCard.setInstruction("DRAW 15 CARDS");
-    std::cout << drawCard.isPlayable() << std::endl;
+    // ActionCard drawCard;
+    // drawCard.setDrawn(true);
+    // drawCard.setInstruction("DRAW 15 CARDS");
+    // std::cout << drawCard.isPlayable() << std::endl;
 
-    ActionCard playCard;
-    playCard.setDrawn(true);
-    playCard.setInstruction("PLAY 1 CARD");
-    std::cout << playCard.isPlayable() << std::endl;
+    // ActionCard playCard;
+    // playCard.setDrawn(true);
+    // playCard.setInstruction("PLAY 1 CARD");
+    // std::cout << playCard.isPlayable() << std::endl;
 
-    ActionCard reverseCard;
-    reverseCard.setDrawn(true);
-    reverseCard.setInstruction("REVERSE HAND");
-    std::cout << reverseCard.isPlayable() << std::endl;
+    // ActionCard reverseCard;
+    // reverseCard.setDrawn(true);
+    // reverseCard.setInstruction("REVERSE HAND");
+    // std::cout << reverseCard.isPlayable() << std::endl;
 
-    ActionCard swapCard;
-    swapCard.setDrawn(true);
-    swapCard.setInstruction("SWAP HAND WITH OPPONENT");
-    std::cout << swapCard.isPlayable() << std::endl;
+    // ActionCard swapCard;
+    // swapCard.setDrawn(true);
+    // swapCard.setInstruction("SWAP HAND WITH OPPONENT");
+    // std::cout << swapCard.isPlayable() << std::endl;
 
-    PointCard numberCard;
-    numberCard.setDrawn(true);
-    numberCard.setInstruction("15");
-    std::cout << numberCard.isPlayable() << std::endl;
+    // PointCard numberCard;
+    // numberCard.setDrawn(true);
+    // numberCard.setInstruction("15");
+    // std::cout << numberCard.isPlayable() << std::endl;
 
-    PointCard stringCard;
-    stringCard.setDrawn(true);
-    stringCard.setInstruction("this is a string");
-    std::cout << stringCard.isPlayable() << std::endl;
-    //test 3 passed for card
+    // PointCard stringCard;
+    // stringCard.setDrawn(true);
+    // stringCard.setInstruction("this is a string");
+    // std::cout << stringCard.isPlayable() << std::endl;
+    // //test 3 passed for card
 
-    ActionCard emptyAction;
-    emptyAction.Print();
+    // ActionCard emptyAction;
+    // emptyAction.Print();
 
-    PointCard emptyPoint;
-    emptyPoint.Print();
+    // PointCard emptyPoint;
+    // emptyPoint.Print();
+
+    // ActionCard defaultAction;
+    // std::cout << defaultAction.getType() << std::endl;
+    // defaultAction.Print();
+
+    // PointCard defaultPoint;
+    // std::cout << defaultPoint.getType() << std::endl;
+    // defaultPoint.Print();
+
+    // ActionCard source;
+    // source.setDrawn(true);
+    // source.setInstruction("DRAW 4 CARDS");
+    // source.setImageData(imageData);
+
+    // ActionCard target;
+    // // target = source;
+    // target = std::move(source);
+    // if (source.getImageData() == nullptr) {
+    //     std::cout << "null" << std::endl;
+    // }
+
+    // source.Print();
+    // target.Print();
+
+    // source.setInstruction("PLAY 2 CARDS");
+    // target.Print();
+    // std::cout << target.isPlayable() << std::endl;
+
+    // source.Print();
+
+    Deck<ActionCard> actionDeck;
+    
+    // Check if it's empty
+    if (actionDeck.IsEmpty()) {
+        std::cout << "The deck is empty." << std::endl;
+    } else {
+        std::cout << "The deck is not empty." << std::endl;
+    }
+
+    ActionCard blankCard1;
+    ActionCard blankCard2;
+    
+    actionDeck.AddCard(blankCard1);
+    actionDeck.AddCard(blankCard2);
+    
+    // Check if the deck is empty after adding cards
+    if (actionDeck.IsEmpty()) {
+        std::cout << "The deck is empty after adding cards." << std::endl;
+    } else {
+        std::cout << "The deck is not empty after adding cards." << std::endl;
+    }
+
+    ActionCard actionCardWithContent;
+    actionCardWithContent.setImageData(imageData);
+    actionCardWithContent.setInstruction("DRAW 1 CARD");
+    actionDeck.AddCard(actionCardWithContent);
+
+    // Draw the card from the deck and use it on the right side of an assignment
+    ActionCard drawnCard;
+    drawnCard = actionDeck.Draw();
+
+    // Check the content of the drawn card
+    drawnCard.Print();
+
+    // Draw multiple cards in a row
+    // for (int i = 0; i < 3; i++) {
+    //     ActionCard drawnCard = actionDeck.Draw();
+    //     drawnCard.Print();
+    // }
+
 
     return 0;
 }
