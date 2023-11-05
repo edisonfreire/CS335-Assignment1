@@ -18,10 +18,8 @@ CardType&& Deck<CardType>::Draw() {
         cards_.pop_back();
         drawnCard.setDrawn(true);
         return std::move(drawnCard);
-    } else {
-        std::out_of_range("Deck is empty");
     }
-    
+    return std::move(CardType());
 }
 
 template <typename CardType>
