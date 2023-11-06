@@ -6,17 +6,20 @@ Card::~Card() {
 }
 
 // copy constructor
-Card::Card(const Card& rhs) : cardType_{rhs.cardType_}, instruction_{rhs.instruction_}, bitmap_{new int[80]}, drawn_{rhs.drawn_} {
+Card::Card(const Card& rhs) {
+    cardType_ = rhs.cardType_;
+    instruction_ = rhs.instruction_;
+    bitmap_ = new int[80];
     std::copy(rhs.bitmap_, rhs.bitmap_ + 80, bitmap_);
+    drawn_ = rhs.drawn_;
 }
-
 // copy assignment
 Card& Card::operator=(const Card& rhs) {
     if (this != &rhs) {
+        delete[] bitmap_;
         cardType_ = rhs.cardType_;
         instruction_ = rhs.instruction_;
-        delete[] bitmap_;
-        bitmap_ = new int[80];
+        bitmap_ = new int[80]; 
         std::copy(rhs.bitmap_, rhs.bitmap_ + 80, bitmap_);
         drawn_ = rhs.drawn_;
     }
@@ -24,18 +27,23 @@ Card& Card::operator=(const Card& rhs) {
 }
 
 // move constructor
-Card::Card(Card&& rhs) : cardType_{rhs.cardType_}, instruction_{std::move(rhs.instruction_)}, bitmap_{std::move(rhs.bitmap_)}, drawn_{rhs.drawn_} {
-    rhs.bitmap_ = new int[80];
+Card::Card(Card&& rhs) {
+    cardType_ = rhs.cardType_;
+    instruction_ = std::move(rhs.instruction_);
+    bitmap_ = std::move(rhs.bitmap_);
+    rhs.bitmap_ = new int[80]; 
+    drawn_ = rhs.drawn_;
 }
+
 
 // move assignment
 Card& Card::operator=(Card&& rhs) {
     if (this != &rhs) {
-        cardType_ = rhs.cardType_;
         delete[] bitmap_;
+        cardType_ = rhs.cardType_;
+        instruction_ = std::move(rhs.instruction_);
         bitmap_ = std::move(rhs.bitmap_);
         rhs.bitmap_ = new int[80];
-        instruction_ = std::move(rhs.instruction_);
         drawn_ = rhs.drawn_;
     }
     return *this;
@@ -64,9 +72,7 @@ const int* Card::getImageData() const {
     return bitmap_;
 }
 
-
 void Card::setImageData(int* data) {
-    // std::copy(data, data + 80, bitmap_);
     bitmap_ = data;
 }
 

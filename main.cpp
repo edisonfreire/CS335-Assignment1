@@ -12,7 +12,7 @@ int main() {
 	ActionCard steve;
 	steve.setInstruction("DRAW 4 CARD(S)");
 	steve.setImageData(p);
-
+	steve.Print();
 	Deck<ActionCard> deck;
 	deck.AddCard(steve);
 	ActionCard workPls = deck.Draw();

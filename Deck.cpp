@@ -15,11 +15,10 @@ template <typename CardType>
 CardType&& Deck<CardType>::Draw() {
     if (!IsEmpty()) {
         CardType drawnCard = std::move(cards_.back());
-        cards_.pop_back();
         drawnCard.setDrawn(true);
+        cards_.pop_back();
         return std::move(drawnCard);
     }
-    // return std::move(CardType());
 }
 
 template <typename CardType>
