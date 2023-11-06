@@ -3,6 +3,7 @@
 #include "PointCard.hpp"
 #include "Deck.hpp"
 #include "Hand.hpp"
+#include "Player.hpp"
 
 int main() {
 	int *p = new int[80];
@@ -36,4 +37,7 @@ int main() {
 
 	std::cout << hand.PlayCard() << std::endl;
 	std::cout << hand.PlayCard() << std::endl;
+
+	std::string test = "PLAY 5 CARDS";
+	std::cout << test.substr(0,3) << std::endl;
 }

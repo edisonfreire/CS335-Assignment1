@@ -4,46 +4,65 @@ Player::Player() : score_{0}, opponent_{nullptr}, actiondeck_{nullptr}, pointdec
 
 Player::~Player() {}
 
-const Hand& Player::getHand() const {
+const Hand &Player::getHand() const
+{
     return hand_;
 }
 
-void Player::setHand(const Hand& hand) {
+void Player::setHand(const Hand &hand)
+{
     hand_ = hand;
 }
 
-int Player::getScore() const {
+int Player::getScore() const
+{
     return score_;
 }
 
-void Player::setScore(const int& score) {
+void Player::setScore(const int &score)
+{
     score_ = score;
 }
 
-void Player::play(ActionCard&& card) {
+void Player::play(ActionCard &&card)
+{
     std::cout << "PLAYING ACTION CARD: " << card.getInstruction() << std::endl;
 
-    if (card.isPlayable()) {
-        const std::string instruction = card.getInstruction();
-
-        if (std::regex_match(instruction, std::regex("(DRAW|PLAY) (\\d+) CARD\\(S\\)"))) {
-            std::smatch match;
-            if (std::regex_search(instruction, match, std::regex("(\\d+)"))) {
-                int numCards = std::stoi(match[1]);
-                if (instruction.find("DRAW") != std::string::npos) {
-                    for (int i = 0; i < numCards; ++i) {
-                        drawPointCard();
+    if (card.isPlayable())
+    {
+        std::string instruction = card.getInstruction();
+        std::smatch match;
+        std::regex drawRegex("(DRAW|PLAY) (\\d+) CARD\\(S\\)");
+        if (std::regex_match(instruction, match, drawRegex))
+        {
+            if (match.size() == 3)
+            {
+                std::string action = match[1].str();      // "DRAW" or "PLAY"
+                int numCards = std::stoi(match[2].str()); // Extracted number of cards
+                if (action == "PLAY")
+                {
+                    for (int i = 0; i < numCards; i++)
+                    {
+                        hand_.PlayCard();
                     }
-                } else if (instruction.find("PLAY") != std::string::npos) {
-                    for (int i = 0; i < numCards; ++i) {
-                        playPointCard();
+                }
+                else if (action == "DRAW")
+                {
+                    for (int i = 0; i < numCards; i++)
+                    {
+                        pointdeck_->Draw();
                     }
                 }
             }
-        } else if (instruction == "REVERSE HAND") {
+        }
+        else if (instruction == "REVERSE HAND")
+        {
             hand_.Reverse();
-        } else if (instruction == "SWAP HAND WITH OPPONENT") {
-            if (opponent_ != nullptr) {
+        }
+        else if (instruction == "SWAP HAND WITH OPPONENT")
+        {
+            if (opponent_ != nullptr)
+            {
                 Hand temp = hand_;
                 setHand(opponent_->getHand());
                 opponent_->setHand(temp);
@@ -52,37 +71,46 @@ void Player::play(ActionCard&& card) {
     }
 }
 
-void Player::drawPointCard() {
-    if (pointdeck_ != nullptr) {
+void Player::drawPointCard()
+{
+    if (pointdeck_ != nullptr)
+    {
         PointCard card = pointdeck_->Draw();
         hand_.addCard(std::move(card));
     }
 }
 
-void Player::playPointCard() {
+void Player::playPointCard()
+{
     score_ += hand_.PlayCard();
 }
 
-void Player::setOpponent(Player* opponent) {
+void Player::setOpponent(Player *opponent)
+{
     opponent_ = opponent;
 }
 
-Player* Player::getOpponent() {
+Player *Player::getOpponent()
+{
     return opponent_;
 }
 
-void Player::setActionDeck(Deck<ActionCard>* actiondeck) {
+void Player::setActionDeck(Deck<ActionCard> *actiondeck)
+{
     actiondeck_ = actiondeck;
 }
 
-Deck<ActionCard>* Player::getActionDeck() {
+Deck<ActionCard> *Player::getActionDeck()
+{
     return actiondeck_;
 }
 
-void Player::setPointDeck(Deck<PointCard>* pointdeck) {
+void Player::setPointDeck(Deck<PointCard> *pointdeck)
+{
     pointdeck_ = pointdeck;
 }
 
-Deck<PointCard>* Player::getPointDeck() {
+Deck<PointCard> *Player::getPointDeck()
+{
     return pointdeck_;
 }
