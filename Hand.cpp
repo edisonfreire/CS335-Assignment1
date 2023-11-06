@@ -1,10 +1,12 @@
 #include "Hand.hpp"
 
-Hand::Hand() {}
+Hand::Hand() : cards_{} {}
 
 Hand::~Hand() {}
 
-Hand::Hand(const Hand& other) {}
+Hand::Hand(const Hand& other) {
+    cards_ = other.cards_;
+}
 
 Hand& Hand::operator=(const Hand& other) {}
 

@@ -1,15 +1,16 @@
 #include "Card.hpp"
 
+// destructor
 Card::~Card() {
-    if (bitmap_ != nullptr) {
-        delete[] bitmap_;
-    }
+    delete[] bitmap_;
 }
 
+// copy constructor
 Card::Card(const Card& rhs) : cardType_{rhs.cardType_}, instruction_{rhs.instruction_}, bitmap_{new int[80]}, drawn_{rhs.drawn_} {
     std::copy(rhs.bitmap_, rhs.bitmap_ + 80, bitmap_);
 }
 
+// copy assignment
 Card& Card::operator=(const Card& rhs) {
     if (this != &rhs) {
         cardType_ = rhs.cardType_;
@@ -22,24 +23,26 @@ Card& Card::operator=(const Card& rhs) {
     return *this;
 }
 
-Card::Card(Card&& rhs) : cardType_{std::move(rhs.cardType_)}, instruction_{std::move(rhs.instruction_)}, bitmap_{nullptr}, drawn_{std::move(rhs.drawn_)} {
-    bitmap_ = rhs.bitmap_;
-    rhs.bitmap_ = nullptr;
+// move constructor
+Card::Card(Card&& rhs) : cardType_{rhs.cardType_}, instruction_{std::move(rhs.instruction_)}, bitmap_{std::move(rhs.bitmap_)}, drawn_{rhs.drawn_} {
+    rhs.bitmap_ = new int[80];
 }
 
+// move assignment
 Card& Card::operator=(Card&& rhs) {
     if (this != &rhs) {
-        cardType_ = std::move(rhs.cardType_);
+        cardType_ = rhs.cardType_;
         delete[] bitmap_;
         bitmap_ = std::move(rhs.bitmap_);
         rhs.bitmap_ = new int[80];
         instruction_ = std::move(rhs.instruction_);
-        drawn_ = std::move(rhs.drawn_);
+        drawn_ = rhs.drawn_;
     }
     return *this;
 }
 
-Card::Card() : cardType_{ACTION_CARD}, instruction_{""}, bitmap_{new int[80]}, drawn_{false} {}
+// constructor
+Card::Card() : instruction_{""}, bitmap_{new int[80]}, drawn_{false} {}
 
 std::string Card::getType() const {
     return (cardType_ == POINT_CARD) ? "POINT_CARD" : "ACTION_CARD";
@@ -61,7 +64,9 @@ const int* Card::getImageData() const {
     return bitmap_;
 }
 
+
 void Card::setImageData(int* data) {
+    // std::copy(data, data + 80, bitmap_);
     bitmap_ = data;
 }
 

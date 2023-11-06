@@ -27,7 +27,7 @@ void ActionCard::Print() const {
     std::cout << "Instruction: " << getInstruction() << std::endl;
 
     const int* imageData = getImageData();
-    if (imageData) {
+    if (imageData != nullptr && imageData[79] != 0) {
         std::cout << "Card:" << std::endl;
         for (int i = 0; i < 80; i++) {
             std::cout << imageData[i] << ' ';

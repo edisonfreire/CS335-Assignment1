@@ -1,7 +1,7 @@
 #include "Deck.hpp"
 
 template <typename CardType>
-Deck<CardType>::Deck() {}
+Deck<CardType>::Deck() : cards_{} {}
 
 template <typename CardType>
 Deck<CardType>::~Deck() {}
@@ -13,13 +13,20 @@ void Deck<CardType>::AddCard(const CardType& card) {
 
 template <typename CardType>
 CardType&& Deck<CardType>::Draw() {
+    std::cout << "1" << std::endl;
     if (!IsEmpty()) {
+        std::cout << "2" << std::endl;
         CardType drawnCard = std::move(cards_.back());
+        drawnCard.Print();
+        std::cout << "3" << std::endl;
         cards_.pop_back();
+        std::cout << "4" << std::endl;
         drawnCard.setDrawn(true);
+        std::cout << "5" << std::endl;
         return std::move(drawnCard);
     }
-    return std::move(CardType());
+    std::cout << "6" << std::endl;
+    // return std::move(CardType());
 }
 
 template <typename CardType>
