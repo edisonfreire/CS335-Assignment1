@@ -43,14 +43,14 @@ void Player::play(ActionCard &&card)
                 {
                     for (int i = 0; i < numCards; i++)
                     {
-                        hand_.PlayCard();
+                        playPointCard();
                     }
                 }
                 else if (action == "DRAW")
                 {
                     for (int i = 0; i < numCards; i++)
                     {
-                        pointdeck_->Draw();
+                        drawPointCard();
                     }
                 }
             }
