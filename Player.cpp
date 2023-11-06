@@ -73,7 +73,7 @@ void Player::play(ActionCard &&card)
 
 void Player::drawPointCard()
 {
-    if (pointdeck_ != nullptr)
+    if (!pointdeck_->IsEmpty() && pointdeck_ != nullptr)
     {
         PointCard card = pointdeck_->Draw();
         hand_.addCard(std::move(card));
@@ -82,7 +82,9 @@ void Player::drawPointCard()
 
 void Player::playPointCard()
 {
-    score_ += hand_.PlayCard();
+    if (!hand_.isEmpty()) {
+        score_ += hand_.PlayCard();
+    }
 }
 
 void Player::setOpponent(Player *opponent)
