@@ -21,8 +21,35 @@ void Player::setScore(const int& score) {
 }
 
 void Player::play(ActionCard&& card) {
-
     std::cout << "PLAYING ACTION CARD: " << card.getInstruction() << std::endl;
+
+    if (card.isPlayable()) {
+        const std::string instruction = card.getInstruction();
+
+        if (std::regex_match(instruction, std::regex("(DRAW|PLAY) (\\d+) CARD\\(S\\)"))) {
+            std::smatch match;
+            if (std::regex_search(instruction, match, std::regex("(\\d+)"))) {
+                int numCards = std::stoi(match[1]);
+                if (instruction.find("DRAW") != std::string::npos) {
+                    for (int i = 0; i < numCards; ++i) {
+                        drawPointCard();
+                    }
+                } else if (instruction.find("PLAY") != std::string::npos) {
+                    for (int i = 0; i < numCards; ++i) {
+                        playPointCard();
+                    }
+                }
+            }
+        } else if (instruction == "REVERSE HAND") {
+            hand_.Reverse();
+        } else if (instruction == "SWAP HAND WITH OPPONENT") {
+            if (opponent_ != nullptr) {
+                Hand temp = hand_;
+                setHand(opponent_->getHand());
+                opponent_->setHand(temp);
+            }
+        }
+    }
 }
 
 void Player::drawPointCard() {
