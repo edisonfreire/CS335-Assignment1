@@ -32,7 +32,7 @@ int main() {
 	hand.addCard(std::move(card1));
 	hand.addCard(std::move(card2));
 
-	// hand.Reverse();
+	hand.Reverse();
 
 	std::cout << hand.PlayCard() << std::endl;
 	std::cout << hand.PlayCard() << std::endl;

@@ -42,7 +42,7 @@ void Hand::Reverse() {
     // Hand reversed = *this;
     // std::reverse(reversed.cards_.rbegin(), reversed.cards_.rend());
     // *this = reversed;
-        size_t left = 0;
+    size_t left = 0;
     size_t right = cards_.size() - 1;
 
     while (left < right) {
@@ -55,7 +55,7 @@ void Hand::Reverse() {
 }
 
 int Hand::PlayCard() {
-        if (isEmpty()) {
+    if (isEmpty()) {
         throw std::runtime_error("Hand is empty. Cannot play a card.");
     }
     PointCard frontCard = std::move(cards_.front());
