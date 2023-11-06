@@ -48,15 +48,12 @@ int Hand::PlayCard() {
         if (isEmpty()) {
         throw std::runtime_error("Hand is empty. Cannot play a card.");
     }
-
     PointCard frontCard = std::move(cards_.front());
     frontCard.setDrawn(true);
     cards_.pop_front();
 
     if (frontCard.isPlayable()) {
         return std::stoi(frontCard.getInstruction());
-    } else {
-        throw std::runtime_error("Card is not playable.");
     }
 
     return 0;
