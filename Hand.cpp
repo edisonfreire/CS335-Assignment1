@@ -2,9 +2,7 @@
 
 Hand::Hand() : cards_{} {}
 
-Hand::~Hand() {
-    cards_.clear();
-}
+Hand::~Hand() {}
 
 Hand::Hand(const Hand& other) {
     cards_ = other.cards_;
@@ -41,9 +39,19 @@ bool Hand::isEmpty() const {
 }
 
 void Hand::Reverse() {
-    Hand reversed = *this;
-    std::reverse(reversed.cards_.rbegin(), reversed.cards_.rend());
-    *this = reversed;
+    // Hand reversed = *this;
+    // std::reverse(reversed.cards_.rbegin(), reversed.cards_.rend());
+    // *this = reversed;
+        size_t left = 0;
+    size_t right = cards_.size() - 1;
+
+    while (left < right) {
+        // Swap the cards at the left and right positions
+        std::swap(cards_[left], cards_[right]);
+        // Move the pointers towards the center
+        ++left;
+        --right;
+    }
 }
 
 int Hand::PlayCard() {
