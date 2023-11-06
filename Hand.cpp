@@ -3,7 +3,7 @@
 Hand::Hand() : cards_{} {}
 
 Hand::~Hand() {
-    cards_.clear()
+    cards_.clear();
 }
 
 Hand::Hand(const Hand& other) {
