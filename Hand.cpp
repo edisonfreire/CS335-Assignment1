@@ -39,15 +39,9 @@ bool Hand::isEmpty() const {
 }
 
 void Hand::Reverse() {
-    size_t left = 0;
-    size_t right = cards_.size() - 1;
-
-    while (left < right) {
-        // Swap the elements using std::swap
-        std::swap(cards_[left], cards_[right]);
-        left++;
-        right--;
-    }
+    Hand reversed = *this;
+    std::reverse(reversed.cards_.rbegin(), reversed.cards_.rend());
+    *this = reversed;
 }
 
 int Hand::PlayCard() {
@@ -56,6 +50,7 @@ int Hand::PlayCard() {
     }
 
     PointCard frontCard = std::move(cards_.front());
+    frontCard.setDrawn(true);
     cards_.pop_front();
 
     if (frontCard.isPlayable()) {
@@ -64,6 +59,5 @@ int Hand::PlayCard() {
         throw std::runtime_error("Card is not playable.");
     }
 
-    // The card is not playable, so no points are earned.
     return 0;
 }
