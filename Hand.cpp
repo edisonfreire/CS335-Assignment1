@@ -2,7 +2,9 @@
 
 Hand::Hand() : cards_{} {}
 
-Hand::~Hand() {}
+Hand::~Hand() {
+    cards_.clear()
+}
 
 Hand::Hand(const Hand& other) {
     cards_ = other.cards_;
