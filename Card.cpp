@@ -29,15 +29,12 @@ Card::Card(Card&& rhs) : cardType_{std::move(rhs.cardType_)}, instruction_{std::
 
 Card& Card::operator=(Card&& rhs) {
     if (this != &rhs) {
-        cardType_ = rhs.cardType_;
-        rhs.cardType_ = ACTION_CARD;
+        cardType_ = std::move(rhs.cardType_);
         delete[] bitmap_;
-        bitmap_ = rhs.bitmap_;
-        rhs.bitmap_ = nullptr;
-        instruction_ = rhs.instruction_;
-        rhs.instruction_ = "";
-        drawn_ = rhs.drawn_;
-        rhs.drawn_ = false;
+        bitmap_ = std::move(rhs.bitmap_);
+        rhs.bitmap_ = new int[80];
+        instruction_ = std::move(rhs.instruction_);
+        drawn_ = std::move(rhs.drawn_);
     }
     return *this;
 }
@@ -65,16 +62,7 @@ const int* Card::getImageData() const {
 }
 
 void Card::setImageData(int* data) {
-    if (data) {
-        delete[] bitmap_;
-        bitmap_ = new int[80];
-        for (int i = 0; i < 80; i++) {
-            bitmap_[i] = data[i];
-        }
-    } else {
-        delete[] bitmap_;
-        bitmap_ = nullptr;
-    }
+    bitmap_ = data;
 }
 
 bool Card::getDrawn() const {

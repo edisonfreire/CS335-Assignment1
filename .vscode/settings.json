@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "deque": "cpp",
         "__bit_reference": "cpp",
         "__bits": "cpp",
         "__config": "cpp",
@@ -31,6 +30,7 @@
         "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
+        "deque": "cpp",
         "exception": "cpp",
         "initializer_list": "cpp",
         "ios": "cpp",
