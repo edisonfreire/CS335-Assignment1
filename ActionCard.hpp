@@ -2,9 +2,10 @@
 CSCI335 Fall 2023
 Assignment 1 – Card Game
 Name: Edison Freire
-Date: 10/26/23
+Date: 11/7/23
 ActionCard.hpp defines the ActionCard class and inherits from the Card Class.
 */
+
 #ifndef ACTIONCARD_HPP
 #define ACTIONCARD_HPP
 

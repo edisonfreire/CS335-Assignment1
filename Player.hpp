@@ -2,8 +2,8 @@
 CSCI335 Fall 2023
 Assignment 1 – Card Game
 Name: Edison Freire
-Date: 10/26/23
-Player.cpp implements the Player class.
+Date: 11/7/23
+Player.hpp defines the Player class.
 */
 
 #ifndef PLAYER_HPP

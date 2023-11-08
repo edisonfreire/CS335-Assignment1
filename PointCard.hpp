@@ -2,9 +2,10 @@
 CSCI335 Fall 2023
 Assignment 1 – Card Game
 Name: Edison Freire
-Date: 10/26/23
+Date: 11/7/23
 PointCard.hpp defines the PointCard class and inherits from the Card Class.
 */
+
 #ifndef POINTCARD_HPP
 #define POINTCARD_HPP
 
@@ -19,6 +20,11 @@ class PointCard : public Card
          * @post: Construct a new Point Card object
          */
         PointCard();
+        
+        /**
+         * @return true if the string is a valid number, false otherwise
+         */
+        bool isNumeric(const std::string& str);
         /**
          * @return true if the card is playable, false otherwise
          * For a card to be playable, it has to be drawn and the instruction has to be a valid number
@@ -35,7 +41,5 @@ class PointCard : public Card
          */
         void Print() const override;
 
-        // helper function for isPlayable
-        bool isNumeric(const std::string& str);
 };
 #endif

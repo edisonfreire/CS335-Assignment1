@@ -2,8 +2,8 @@
 CSCI335 Fall 2023
 Assignment 1 – Card Game
 Name: Edison Freire
-Date: 10/26/23
-Hand.cpp Defines the Hand class.
+Date: 11/7/23
+Hand.hpp defines the Hand class.
 */
 
 #ifndef HAND_HPP
