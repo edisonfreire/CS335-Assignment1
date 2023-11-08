@@ -2,7 +2,8 @@
 
 Player::Player() : score_{0}, opponent_{nullptr}, actiondeck_{nullptr}, pointdeck_{nullptr} {}
 
-Player::~Player() {
+Player::~Player()
+{
     delete opponent_;
     delete actiondeck_;
     delete pointdeck_;
@@ -31,46 +32,42 @@ void Player::setScore(const int &score)
 void Player::play(ActionCard &&card)
 {
     std::cout << "PLAYING ACTION CARD: " << card.getInstruction() << std::endl;
-
-    if (card.isPlayable())
+    std::string instruction = card.getInstruction();
+    std::smatch match;
+    std::regex drawRegex("(DRAW|PLAY) (\\d+) CARD\\(S\\)");
+    if (std::regex_match(instruction, match, drawRegex))
     {
-        std::string instruction = card.getInstruction();
-        std::smatch match;
-        std::regex drawRegex("(DRAW|PLAY) (\\d+) CARD\\(S\\)");
-        if (std::regex_match(instruction, match, drawRegex))
+        if (match.size() == 3)
         {
-            if (match.size() == 3)
+            std::string action = match[1].str();      // "DRAW" or "PLAY"
+            int numCards = std::stoi(match[2].str()); // Extracted number of cards
+            if (action == "PLAY")
             {
-                std::string action = match[1].str();      // "DRAW" or "PLAY"
-                int numCards = std::stoi(match[2].str()); // Extracted number of cards
-                if (action == "PLAY")
+                for (int i = 0; i < numCards; i++)
                 {
-                    for (int i = 0; i < numCards; i++)
-                    {
-                        playPointCard();
-                    }
+                    playPointCard();
                 }
-                else if (action == "DRAW")
+            }
+            else if (action == "DRAW")
+            {
+                for (int i = 0; i < numCards; i++)
                 {
-                    for (int i = 0; i < numCards; i++)
-                    {
-                        drawPointCard();
-                    }
+                    drawPointCard();
                 }
             }
         }
-        else if (instruction == "REVERSE HAND")
+    }
+    else if (instruction == "REVERSE HAND")
+    {
+        hand_.Reverse();
+    }
+    else if (instruction == "SWAP HAND WITH OPPONENT")
+    {
+        if (opponent_ != nullptr)
         {
-            hand_.Reverse();
-        }
-        else if (instruction == "SWAP HAND WITH OPPONENT")
-        {
-            if (opponent_ != nullptr)
-            {
-                Hand temp = hand_;
-                setHand(opponent_->getHand());
-                opponent_->setHand(temp);
-            }
+            Hand temp = hand_;
+            setHand(opponent_->getHand());
+            opponent_->setHand(temp);
         }
     }
 }
@@ -86,7 +83,8 @@ void Player::drawPointCard()
 
 void Player::playPointCard()
 {
-    if (!hand_.isEmpty()) {
+    if (!hand_.isEmpty())
+    {
         setScore(score_ + hand_.PlayCard());
     }
 }
