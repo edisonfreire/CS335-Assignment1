@@ -2,7 +2,11 @@
 
 Player::Player() : score_{0}, opponent_{nullptr}, actiondeck_{nullptr}, pointdeck_{nullptr} {}
 
-Player::~Player() {}
+Player::~Player() {
+    delete opponent_;
+    delete actiondeck_;
+    delete pointdeck_;
+}
 
 const Hand &Player::getHand() const
 {
@@ -83,7 +87,7 @@ void Player::drawPointCard()
 void Player::playPointCard()
 {
     if (!hand_.isEmpty()) {
-        score_ += hand_.PlayCard();
+        setScore(score_ + hand_.PlayCard());
     }
 }
 

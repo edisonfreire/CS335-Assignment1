@@ -1,8 +1,3 @@
-#include "Card.hpp"
-#include "ActionCard.hpp"
-#include "PointCard.hpp"
-#include "Deck.hpp"
-#include "Hand.hpp"
 #include "Player.hpp"
 
 int main() {
@@ -38,6 +33,8 @@ int main() {
 	std::cout << hand.PlayCard() << std::endl;
 	std::cout << hand.PlayCard() << std::endl;
 
-	std::string test = "PLAY 5 CARDS";
-	std::cout << test.substr(0,3) << std::endl;
+	Player p1;
+	Player p2;
+	p1.setOpponent(&p2);
+	p2.setOpponent(&p1);
 }
